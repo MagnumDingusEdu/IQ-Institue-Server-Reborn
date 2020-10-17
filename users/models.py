@@ -4,11 +4,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
 class Course(models.Model):
-    title = models.CharField(max_length=255, default='default-course')
+    title = models.CharField(max_length=255, default="default-course")
 
     class Meta:
-        ordering = ['title']
+        ordering = ["title"]
 
     def __str__(self):
         return self.title
@@ -24,7 +25,7 @@ class Student(models.Model):
     multi_device_login = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['user']
+        ordering = ["user"]
 
     def __str__(self):
         return self.user.username + " - " + self.user.first_name

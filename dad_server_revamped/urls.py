@@ -5,11 +5,14 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("lectures/", include("lectures.urls")),
 ]
 
 if settings.DEBUG:
     # Add urls for the debug toolbar
     import debug_toolbar
+
     urlpatterns += [path("__debug__", include(debug_toolbar.urls))]
 
     # Static and media serving

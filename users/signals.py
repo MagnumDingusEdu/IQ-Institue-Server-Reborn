@@ -11,5 +11,3 @@ def create_student_model(sender, instance, created, **kwargs):
         Student.objects.create(user=instance)
     else:
         instance.student.save()
-
-
