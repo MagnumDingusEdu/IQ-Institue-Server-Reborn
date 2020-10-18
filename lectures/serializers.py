@@ -3,14 +3,6 @@ from lectures.models import Node
 from users.serializers import CourseSerializer
 
 
-class NodeSerializer(serializers.ModelSerializer):
-    courses = CourseSerializer(read_only=True, many=True)
-
-    class Meta:
-        model = Node
-        fields = ["id", "title", "type", "parent", "courses", "video_link"]
-
-
 class NodeChildrenSerializer(serializers.ModelSerializer):
     link = serializers.HyperlinkedIdentityField(view_name="node-detail", format="html")
 
@@ -20,7 +12,7 @@ class NodeChildrenSerializer(serializers.ModelSerializer):
 
 
 class NodeDetailSerializer(serializers.ModelSerializer):
-    courses = CourseSerializer(read_only=True, many=True)
+    courses = CourseSerializer(many=True)
     # link = serializers.HyperlinkedIdentityField(view_name='node-detail', format='html', lookup_field='pk')
 
     parent = NodeChildrenSerializer()
@@ -30,3 +22,9 @@ class NodeDetailSerializer(serializers.ModelSerializer):
         fields = ("id", "title", "path", "date_created", "courses", "parent",)
 
         depth = 1
+
+
+class NodeCRUDOperations(serializers.ModelSerializer):
+    class Meta:
+        model = Node
+        fields = ("title", "parent", "courses", "video_link", "type")

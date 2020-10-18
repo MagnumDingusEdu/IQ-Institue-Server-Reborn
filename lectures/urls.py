@@ -1,8 +1,9 @@
 from django.urls import path
-from lectures.views import NodeAllListView, NodeDetailView, NodeRootView
+from lectures.views import NodeDetailView, NodeRootView, NodeSearchView
 
 urlpatterns = [
-    path("", NodeAllListView.as_view(), name="all-admin-view"),
+
     path("detail/<uuid:pk>/", NodeDetailView.as_view(), name="node-detail"),
-    path("detail/", NodeRootView.as_view(), name="node-root"),
+    path("", NodeRootView.as_view(), name="node-root"),
+    path("search/", NodeSearchView.as_view(), name='node-search'),
 ]

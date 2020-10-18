@@ -19,18 +19,26 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "rest_framework",
     "rest_framework.authtoken",
+    "corsheaders",
     "users.apps.UsersConfig",
     "lectures.apps.LecturesConfig",
+    "django.contrib.postgres"
+
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+
+    # CORS
+    "corsheaders.middleware.CorsMiddleware",
+
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
 ]
 
 ROOT_URLCONF = "dad_server_revamped.urls"
@@ -68,9 +76,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator", },
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator", },
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator", },
 ]
 
 LANGUAGE_CODE = "en-us"
@@ -119,6 +127,14 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
     # "DATETIME_FORMAT": "%s",
 }
+
+
+# CORS STUFF
+
+CORS_ORIGIN_ALLOW_ALL = DEBUG # True if debug is true
+CORS_ORIGIN_WHITELIST = (
+    'https://iqinstitute.org',
+)
 
 ##################### DEBUG SECTION #####################
 if DEBUG:

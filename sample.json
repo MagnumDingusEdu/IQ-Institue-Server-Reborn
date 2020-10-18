@@ -1,0 +1,9 @@
+{
+  "title": "Test Directory",
+  "parent": "39a50b92-dea9-4234-9260-535ce122ecf2",
+  "courses": [
+    1,
+    2
+  ],
+  "type": "dir"
+}
