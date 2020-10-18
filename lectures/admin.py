@@ -15,7 +15,14 @@ class NodeAdmin(admin.ModelAdmin):
             course_list = course_list + course.title + ", "
         return course_list
 
-    list_display = ("title", "type", "parent", "video_link", "course_details", "date_created")
+    list_display = (
+        "title",
+        "type",
+        "parent",
+        "video_link",
+        "course_details",
+        "date_created",
+    )
     list_filter = (
         "courses",
         "type",
@@ -25,4 +32,3 @@ class NodeAdmin(admin.ModelAdmin):
     ]
     search_fields = ["title", "parent"]
     readonly_fields = ["path", "id"]
-

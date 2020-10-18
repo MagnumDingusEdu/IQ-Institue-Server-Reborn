@@ -10,21 +10,44 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Node',
+            name="Node",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=1024)),
-                ('type', models.CharField(choices=[('dir', 'Directory'), ('vid', 'Lecture')], default='dir', max_length=1024)),
-                ('video_link', models.CharField(blank=True, max_length=512, null=True)),
-                ('date_created', models.DateTimeField(auto_now_add=True)),
-                ('path', models.TextField(default='')),
-                ('courses', models.ManyToManyField(to='users.Course')),
-                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='lectures.node')),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("title", models.CharField(max_length=1024)),
+                (
+                    "type",
+                    models.CharField(
+                        choices=[("dir", "Directory"), ("vid", "Lecture")],
+                        default="dir",
+                        max_length=1024,
+                    ),
+                ),
+                ("video_link", models.CharField(blank=True, max_length=512, null=True)),
+                ("date_created", models.DateTimeField(auto_now_add=True)),
+                ("path", models.TextField(default="")),
+                ("courses", models.ManyToManyField(to="users.Course")),
+                (
+                    "parent",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="lectures.node",
+                    ),
+                ),
             ],
         ),
     ]

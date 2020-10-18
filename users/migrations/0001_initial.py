@@ -15,28 +15,49 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(default='default-course', max_length=255)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(default="default-course", max_length=255)),
             ],
-            options={
-                'ordering': ['title'],
-            },
+            options={"ordering": ["title"],},
         ),
         migrations.CreateModel(
-            name='Student',
+            name="Student",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('account_active', models.BooleanField(default=True)),
-                ('logged_in', models.BooleanField(default=False)),
-                ('last_login_time', models.DateTimeField(blank=True, default=None, null=True)),
-                ('multi_device_login', models.BooleanField(default=False)),
-                ('courses', models.ManyToManyField(to='users.Course')),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("account_active", models.BooleanField(default=True)),
+                ("logged_in", models.BooleanField(default=False)),
+                (
+                    "last_login_time",
+                    models.DateTimeField(blank=True, default=None, null=True),
+                ),
+                ("multi_device_login", models.BooleanField(default=False)),
+                ("courses", models.ManyToManyField(to="users.Course")),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'ordering': ['user'],
-            },
+            options={"ordering": ["user"],},
         ),
     ]

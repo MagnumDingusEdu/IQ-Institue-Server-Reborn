@@ -12,7 +12,7 @@ from rest_framework.views import APIView
 from lectures.serializers import (
     NodeDetailSerializer,
     NodeChildrenSerializer,
-    NodeCRUDOperations
+    NodeCRUDOperations,
 )
 from lectures.models import Node
 from lectures.permissions import IsActive
@@ -42,7 +42,9 @@ class NodeDetailView(APIView):
         node = self.get_object(pk)
         serializer = NodeDetailSerializer(node, context=serializer_context)
         folder_detail = serializer.data
-        children = Node.objects.filter(parent=node).filter(courses__in=user_courses).distinct()
+        children = (
+            Node.objects.filter(parent=node).filter(courses__in=user_courses).distinct()
+        )
         children_detail = NodeChildrenSerializer(
             children, many=True, context=serializer_context
         )
@@ -53,7 +55,11 @@ class NodeDetailView(APIView):
 
     def put(self, request, pk, *args, **kwargs):
         if not request.user.is_staff:
-            raise PermissionDenied({"detail": "You do not have the required permissions to perform this action."})
+            raise PermissionDenied(
+                {
+                    "detail": "You do not have the required permissions to perform this action."
+                }
+            )
         node = self.get_object(pk)
         serializer = NodeCRUDOperations(node, data=request.data)
 
@@ -64,7 +70,11 @@ class NodeDetailView(APIView):
 
     def delete(self, request, pk, *args, **kwargs):
         if not request.user.is_staff:
-            raise PermissionDenied({"detail": "You do not have the required permissions to perform this action."})
+            raise PermissionDenied(
+                {
+                    "detail": "You do not have the required permissions to perform this action."
+                }
+            )
         node = self.get_object(pk)
         node.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -88,7 +98,9 @@ class NodeRootView(APIView):
         node = Node.objects.get(parent=None)
         serializer = NodeDetailSerializer(node, context=serializer_context)
         folder_detail = serializer.data
-        children = Node.objects.filter(parent=node).filter(courses__in=user_courses).distinct()
+        children = (
+            Node.objects.filter(parent=node).filter(courses__in=user_courses).distinct()
+        )
         children_detail = NodeChildrenSerializer(
             children, many=True, context=serializer_context
         )
@@ -99,7 +111,11 @@ class NodeRootView(APIView):
 
     def post(self, request, *args, **kwargs):
         if not request.user.is_staff:
-            raise PermissionDenied({"detail": "You do not have the required permissions to perform this action."})
+            raise PermissionDenied(
+                {
+                    "detail": "You do not have the required permissions to perform this action."
+                }
+            )
         serializer = NodeCRUDOperations(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -117,11 +133,13 @@ class NodeSearchView(generics.ListAPIView):
     serializer_class = NodeChildrenSerializer
 
     def get_queryset(self):
-        node_title = self.request.query_params.get('query', None)
+        node_title = self.request.query_params.get("query", None)
         if not node_title:
             return Node.objects.none()
         user_courses = list(self.request.user.student.courses.all())
-        queryset = Node.objects \
-            .filter(type='vid', title__search=node_title) \
-            .filter(courses__in=user_courses).distinct()
+        queryset = (
+            Node.objects.filter(type="vid", title__search=node_title)
+            .filter(courses__in=user_courses)
+            .distinct()
+        )
         return queryset

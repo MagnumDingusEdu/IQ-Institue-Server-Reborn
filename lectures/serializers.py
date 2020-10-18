@@ -19,7 +19,14 @@ class NodeDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Node
-        fields = ("id", "title", "path", "date_created", "courses", "parent",)
+        fields = (
+            "id",
+            "title",
+            "path",
+            "date_created",
+            "courses",
+            "parent",
+        )
 
         depth = 1
 
