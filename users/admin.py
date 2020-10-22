@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from users.models import Course, Student
-
+from users.models import Course, Student, NewRegistration
 
 class UserInline(admin.TabularInline):
     model = User
@@ -43,3 +42,12 @@ class StudentAdmin(admin.ModelAdmin):
         "courses",
     ]
     search_fields = ["user.username", "user.first_name"]
+
+
+@admin.register(NewRegistration)
+class NewRegistrationAdmin(admin.ModelAdmin):
+    search_fields = ['name', 'mobile']
+    list_display = ['name', 'email', 'mobile',  'courses']
+
+
+

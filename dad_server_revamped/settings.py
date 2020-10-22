@@ -89,6 +89,8 @@ USE_TZ = True
 
 SITE_ID = 1
 
+APPEND_SLASH = False
+
 # Static Files
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "static"
@@ -164,3 +166,4 @@ if DEBUG:
         "INTERCEPT_REDIRECTS": False,
         "SHOW_COLLAPSED": True,
     }
+
