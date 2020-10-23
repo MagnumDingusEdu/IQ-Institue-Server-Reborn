@@ -40,7 +40,7 @@ class GenerateAuthToken(ObtainAuthToken):
         course_list = CourseSerializer(user.student.courses.all(), many=True)
 
         return Response(
-            {"token": token.key, "name": user.first_name, "courses": course_list.data}
+            {"token": token.key, "name": user.first_name, "courses": course_list.data, "email": user.email}
         )
 
 
@@ -123,3 +123,20 @@ class ChangePasswordView(generics.UpdateAPIView):
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class ChangeEmailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def put(self, request, format=None):
+        user = self.request.user
+        email = request.data.get('email', None)
+
+        if not email:
+            return Response({"error": "email field is required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user.email = email
+            user.save()
+            return Response({"status": "E-mail changed successfully !"})
+        except:
+            return Response({"error": "Unable to change email address"}, status=status.HTTP_412_PRECONDITION_FAILED)
