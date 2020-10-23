@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0002_newregistration'),
+        ("users", "0002_newregistration"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='newregistration',
-            name='choices',
-            field=models.CharField(default='', max_length=1024),
+            model_name="newregistration",
+            name="choices",
+            field=models.CharField(default="", max_length=1024),
             preserve_default=False,
         ),
     ]

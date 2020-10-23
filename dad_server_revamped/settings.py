@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "lectures.apps.LecturesConfig",
     "django.contrib.postgres",
+    "django_rest_passwordreset",
 ]
 
 MIDDLEWARE = [
@@ -166,4 +167,3 @@ if DEBUG:
         "INTERCEPT_REDIRECTS": False,
         "SHOW_COLLAPSED": True,
     }
-

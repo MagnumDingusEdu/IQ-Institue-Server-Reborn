@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from users.models import Course, NewRegistration
+from django.contrib.auth.models import User
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -14,4 +15,10 @@ class CourseSerializer(serializers.ModelSerializer):
 class NewRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = NewRegistration
-        fields = ("name", 'email', 'mobile', 'courses')
+        fields = ("name", "email", "mobile", "courses")
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

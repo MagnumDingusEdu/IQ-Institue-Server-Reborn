@@ -2,12 +2,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("lectures/", include("lectures.urls")),
     path("users/", include("users.urls")),
+    url(
+        r"^users/password_reset/",
+        include("django_rest_passwordreset.urls", namespace="password_reset"),
+    ),
 ]
 
 if settings.DEBUG:

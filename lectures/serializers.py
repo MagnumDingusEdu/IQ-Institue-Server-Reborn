@@ -3,6 +3,7 @@ from lectures.models import Node
 from users.serializers import CourseSerializer
 from base64 import b64encode
 
+
 class NodeChildrenSerializer(serializers.ModelSerializer):
     link = serializers.HyperlinkedIdentityField(view_name="node-detail", format="html")
     video_link = serializers.SerializerMethodField()
