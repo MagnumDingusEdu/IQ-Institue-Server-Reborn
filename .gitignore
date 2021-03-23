@@ -145,3 +145,4 @@ dmypy.json
 
 # profiling data
 .prof
+dump.json

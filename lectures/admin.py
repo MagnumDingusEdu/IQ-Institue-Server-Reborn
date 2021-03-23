@@ -30,5 +30,5 @@ class NodeAdmin(admin.ModelAdmin):
     filter_horizontal = [
         "courses",
     ]
-    search_fields = ["title", "parent"]
+    search_fields = ["title", "parent__title"]
     readonly_fields = ["path", "id"]
